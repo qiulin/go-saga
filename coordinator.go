@@ -8,8 +8,8 @@ import (
 	"strconv"
 )
 
-// DefaultSEC is default SEC use by package method
-var DefaultSEC ExecutionCoordinator = NewSEC()
+// DefaultCoordinator is default SEC use by package method
+var DefaultCoordinator ExecutionCoordinator = NewCoordinator()
 
 // ExecutionCoordinator presents Saga Execution Coordinator.
 // It manages:
@@ -20,9 +20,9 @@ type ExecutionCoordinator struct {
 	paramTypeRegister *paramTypeRegister
 }
 
-// NewSEC creates Saga Execution Coordinator
+// NewCoordinator creates Saga Execution Coordinator
 // This method require supply a log Storage to save & lookup log during tx execute.
-func NewSEC() ExecutionCoordinator {
+func NewCoordinator() ExecutionCoordinator {
 	return ExecutionCoordinator{
 		subTxDefinitions: make(subTxDefinitions),
 		paramTypeRegister: &paramTypeRegister{
@@ -41,7 +41,7 @@ func NewSEC() ExecutionCoordinator {
 //
 // action and compensate MUST a function that context.Context as first argument.
 func AddSubTxDef(subTxID string, action interface{}, compensate interface{}) *ExecutionCoordinator {
-	return DefaultSEC.AddSubTxDef(subTxID, action, compensate)
+	return DefaultCoordinator.AddSubTxDef(subTxID, action, compensate)
 }
 
 // AddSubTxDef create & add definition base on given subTxID, action and compensate, and return current SEC.
@@ -106,7 +106,7 @@ func (e *ExecutionCoordinator) StartCoordinator() error {
 // StartSaga start a new saga, returns the saga was started in Default SEC.
 // This method need execute context and UNIQUE id to identify saga instance.
 func StartSaga(ctx context.Context, id uint64) *Saga {
-	return DefaultSEC.StartSaga(ctx, id)
+	return DefaultCoordinator.StartSaga(ctx, id)
 }
 
 // StartSaga start a new saga, returns the saga was started.

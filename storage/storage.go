@@ -1,7 +1,5 @@
 package storage
 
-import "time"
-
 // Storage uses to support save and lookup saga log.
 type Storage interface {
 
@@ -27,9 +25,4 @@ type Storage interface {
 type StorageProvider func(cfg StorageConfig) Storage
 
 type StorageConfig struct {
-	Kafka struct {
-		ZkAddrs, BrokerAddrs []string
-		Partitions, Replicas int
-		ReturnDuration       time.Duration
-	}
 }

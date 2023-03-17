@@ -18,8 +18,8 @@ func initParam() {
 
 func TestMarshalParam(t *testing.T) {
 	initParam()
-	pd := saga.MarshalParam(&saga.DefaultSEC, []interface{}{"a", 1})
-	rv := saga.UnmarshalParam(&saga.DefaultSEC, pd)
+	pd := saga.MarshalParam(&saga.DefaultCoordinator, []interface{}{"a", 1})
+	rv := saga.UnmarshalParam(&saga.DefaultCoordinator, pd)
 
 	p := []reflect.Value{}
 	p = append(p, reflect.ValueOf(context.Background()))
@@ -38,8 +38,8 @@ func Param2(ctx context.Context, name *string, aga int) {
 func TestMarshalPtr(t *testing.T) {
 	initParam()
 	x := "a"
-	pd := saga.MarshalParam(&saga.DefaultSEC, []interface{}{&x, 1})
-	rv := saga.UnmarshalParam(&saga.DefaultSEC, pd)
+	pd := saga.MarshalParam(&saga.DefaultCoordinator, []interface{}{&x, 1})
+	rv := saga.UnmarshalParam(&saga.DefaultCoordinator, pd)
 
 	p := []reflect.Value{}
 	p = append(p, reflect.ValueOf(context.Background()))
