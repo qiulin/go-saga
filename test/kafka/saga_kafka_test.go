@@ -4,8 +4,7 @@ import (
 	"golang.org/x/net/context"
 
 	"fmt"
-	"github.com/lysu/go-saga"
-	_ "github.com/lysu/go-saga/storage/kafka"
+	_ "github.com/qiulin/go-saga/storage/kafka"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
